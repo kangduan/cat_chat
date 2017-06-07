@@ -1,0 +1,426 @@
+[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+<head>
+	<title>가톨릭대학교 채팅 커뮤니티</title>
+
+	<!-- Meta -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+	<!-- Favicon -->
+	<link rel="shortcut icon" href="../favicon.ico">
+
+	<!-- Web Fonts -->
+	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&amp;subset=cyrillic,latin">
+
+	<!-- CSS Global Compulsory ok!-->
+  <link rel="stylesheet" href="../assets/plugins/bootstrap.min.css">
+  <link rel="stylesheet" href="../assets/css/app.css">
+  <link rel="stylesheet" href="../assets/css/blocks.css">
+  <link rel="stylesheet" href="../assets/css/one.style.css">
+
+	<!-- CSS Footer ok!-->
+	<link rel="stylesheet" href="../assets/css/footers/footer-v7.css">
+
+	<!-- CSS Implementing Plugins ok!-->
+	<link rel="stylesheet" href="../assets/plugins/animate.css">
+	<link rel="stylesheet" href="../assets/plugins/line-icons.css">
+	<link rel="stylesheet" href="../assets/plugins/font-awesome.min.css">
+	<link rel="stylesheet" href="../assets/plugins/pace-flash.css">
+	<link rel="stylesheet" href="../assets/plugins/owl.carousel.css">
+	<link rel="stylesheet" href="../assets/plugins/cubeportfolio.min.css">
+	<link rel="stylesheet" href="../assets/plugins/custom-cubeportfolio.css">
+	<link rel="stylesheet" href="../assets/plugins/shhos.css">
+
+  <!-- CSS Theme ok!-->
+  <link rel="stylesheet" href="../assets/css/app.style.css">
+
+  <!-- CSS Customization ok!-->
+  <link rel="stylesheet" href="../assets/css/custom.css">
+
+</head>
+
+<body id="body" data-spy="scroll" data-target=".one-page-header" class="demo-lightbox-gallery">
+<!-- Header -->
+	<nav class="one-page-header navbar navbar-default navbar-fixed-animate homeapp-header" data-role="navigation">
+		<div class="container">
+			<div class="menu-container page-scroll">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+
+				<a class="navbar-brand" href="#body">
+					<!-- logo <img src="assets/img/logo-dark.png" alt="Logo">-->
+				    <h3 style="margin-left:150px;">CAT_CHAT</h3>
+				</a>
+			</div>
+
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse navbar-ex1-collapse">
+				<div class="menu-container">
+					<ul class="nav navbar-nav">
+						<li class="page-scroll home">
+							<a href="#chat">채팅</a>
+						</li>
+						<li class="page-scroll">
+							<a href="#posting">게시판</a>
+						</li>
+						<li class="page-scroll">
+							<a href="#contacts">연락</a>
+						</li>
+            <% if user_signed_in? %>
+             <li class="dropdown">
+							  <div style="margin-left:80px; margin-top:7px;"><strong><%= current_user.username %></strong>님 안녕하세요!</div>
+               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></a>
+               <ul class="dropdown-menu">
+                 <li><%= link_to "설정", edit_user_registration_path %></li>
+                 <li role="separator" class="divider"></li>
+                 <li><%= link_to "로그아웃", destroy_user_session_path, method: :delete %></li>
+               </ul>
+             </li>
+           <% else %>
+             <li class="page-scroll hidden-xs hidden-sm"><%= link_to "회원가입", new_user_registration_path, class:"btn-u btn-u-lg btn-u-green btn-u-upper rounded-2x" %></li>
+             <li class="page-scroll hidden-xs hidden-sm"><%= link_to "로그인", new_user_session_path, class:"btn-u btn-u-lg btn-u-green btn-u-upper rounded-2x" %></li>
+           <% end %>
+
+         <!--
+						<li class="page-scroll hidden-xs hidden-sm">
+							  <a href="#" class="btn-u btn-u-lg btn-u-green btn-u-upper rounded-2x">SIGN_UP</a>
+            </li>
+						<li class="page-scroll hidden-xs hidden-sm">
+							<a href="#" class="btn-u btn-u-lg btn-u-green btn-u-upper rounded-2x">LOGIN</a>
+						</li>
+          -->
+					</ul>
+				</div>
+			</div>
+			<!-- /.navbar-collapse -->
+		</div>
+		<!-- /.container -->
+	</nav>
+	<!-- End Header -->
+
+
+	<!-- How It Works -->
+	<section id="chat">
+
+		<div class="container">
+			<div class="app-screens">
+				<div class="g-heading-v10 g-mb-65 text-center">
+					<h2><em class="block-name"><span>01.</span> 채팅방 리스트</em> 우리..<strong> 이야기할까요?..</strong></h2>
+				</div>
+
+				<div class="cube-portfolio">
+					<div id="filters-container" class="cbp-l-filters-button">
+						<div data-filter="*" class="cbp-filter-item-active cbp-filter-item">모든 채팅방</div>
+						<div data-filter=".cube-login" class="cbp-filter-item">가대 이모저모</div>
+						<div data-filter=".cube-sign-up" class="cbp-filter-item">맛집</div>
+						<div data-filter=".cube-home" class="cbp-filter-item">영화</div>
+						<div data-filter=".cube-calender" class="cbp-filter-item">대학생</div>
+						<!--<div data-filter=".cube-list" class="cbp-filter-item">경제</div>-->
+					</div><!--/end Filters Container-->
+
+					<div id="grid-container" class="cbp-l-grid-gallery">
+						<div class="cbp-item cube-login">
+							<!--
+							<a href="/img-temp/appscreen1.jpg" class="cbp-caption cbp-lightbox" data-title="custom title 1">
+								<div class="cbp-caption-defaultWrap">
+									<img src="/chatroom-img/catholic_1.jpg" alt="">
+								</div>
+								<div class="cbp-caption-activeWrap">
+									<div class="cbp-l-caption-alignCenter">
+										<div class="cbp-l-caption-body">
+											<div class="cbp-l-caption-title">+</div>
+										</div>
+									</div>
+								</div>
+							</a>
+						-->
+						</div>
+
+						<div class="cbp-item cube-sign-up">
+              <p id="notice"><%= notice %></p>
+              <!--<h1>Chatrooms</h1>-->
+              <table>
+            <!--
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th colspan="3"></th>
+                  </tr>
+                </thead>
+              -->
+                <tbody>
+                  <% @chatrooms.each do |chatroom| %>
+                    <tr>
+                      <!-- image render  -->
+                      <td><%= chatroom.name %></td>
+                      <!--<td><%= link_to 'Show', chatroom %></td><br>-->
+											<td><%= link_to "참여하기", chatroom_chatroom_users_path(chatroom), method: :post %></td>
+											<!-- 채팅 방 안에 넣어야 할 것 같다 -->
+											<<!--td><%= link_to "떠나기", chatroom_chatroom_users_path(chatroom), method: :delete %></td>-->
+											<!--
+                      <td><%= link_to 'Edit', edit_chatroom_path(chatroom) %></td>
+                      <td><%= link_to 'Destroy', chatroom, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+										  -->
+										</tr>
+                  <% end %>
+                </tbody>
+              </table>
+              <br>
+            <%= link_to '새로운 채팅방 ', new_chatroom_path %>
+						</div>
+
+						<div class="cbp-item cube-sign-up">
+
+						</div>
+
+						<div class="cbp-item cube-home">
+
+						</div>
+
+						<div class="cbp-item cube-calander">
+
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- End How It Works -->
+
+	<!-- FAQ -->
+	<section id="posting">
+		<div class="container">
+			<div class="faq">
+				<div class="g-heading-v10 g-mb-65">
+					<h2><em class="block-name"><span>02.</span> 게시판</em> 자유롭게 <strong>떠들어요!</strong></h2>
+					<p>자유롭게 이용해주세요.</p>
+				</div>
+
+				<!-- Tab v1 -->
+				<div class="tab-v1">
+					<ul class="nav nav-tabs">
+						<li class="active"><a href="#everything" data-toggle="tab">모든 게시글</a></li>
+						<li><a href="#needs_posting" data-toggle="tab">요구사항</a></li>
+						<li><a href="#trivial_posting" data-toggle="tab">그저그런 사소한 이야기</a></li>
+						<li><a href="#good_posting" data-toggle="tab">알아두면 좋은 이야기</a></li>
+					</ul>
+					<div class="tab-content">
+						<div class="tab-pane fade in active" id="everything">
+							<div class="tab-in">
+									<% @posts.each do |p|%>
+										 <div class="well">
+											<strong>제목  </strong><br><%= p.title %><br>
+											<strong>말하기</strong><br><%= p.content %><br><br>
+											<% p.replies.each do |r| %>
+												<p><strong>ㄴ  </strong><%= r.content %></p>
+											<% end %>
+										 </div>
+										 <br>
+									<% end %>
+							</div>
+						</div>
+
+						<div class="tab-pane fade in" id="needs_posting">
+							<div class="tab-in">
+								<!-- Ajax로 다시 짜기 -->
+								<form action="/write" method="post">
+									<div class="form-group">
+								    <label for="exampleInputEmail1">제목</label>
+								    <input type="text" name="post_title" class="form-control" id="exampleInputEmail1" placeholder="저의 요구사항을 들어주세요!!">
+								  </div>
+									<div class="form-group">
+	                  <label for="comment">말하기 </label>
+	                  <textarea class="form-control" name="post_content" rows="2" id="content" placeholder="***방도 개설해주세요!!"></textarea>
+	                </div>
+									<button type="submit" class="new_submit btn btn-default">보내기</button>
+								</form>
+
+								<br><br>
+
+									<% @posts.each do |p|%>
+										 <div class="well">
+											<!--<strong>[요구사항]</strong><br>-->
+											<div id="new_post">
+												<strong>제목  </strong><br><%= p.title %><br>
+												<strong>말하기  </strong><br><%= p.content %><br><br>
+											</div>
+											<!-- 새 글 ajax 코드 -->
+
+
+											<div id="reply_<%= p.id %>">
+												<% p.replies.each do |r| %>
+													<p><strong>ㄴ  </strong><%= r.content %></p>
+												<% end %>
+											</div>
+
+											<!--<form action="/reply_write" method="post">-->
+												<div class="form-group">
+				                  <label for="comment">답글 </label>
+													<!--<input type="hidden" value="<%= p.id %>" name="id_of_post">-->
+				                  <textarea class="form-control" id="content_<%= p.id %>" class="reply_content" name="reply_content" rows="1" id="content" placeholder="오! 좋은 생각이네요."></textarea>
+				                </div>
+												<button value="<%= p.id %>" type="submit" class="reply_submit btn btn-default">보내기</button>
+											<!--</form>-->
+											<!-- 댓글 ajax 코드 -->
+											<script>
+											$(function(){
+												 $(".reply_submit").click(function(){
+													 post_id = this.value;
+													 post_content = $("#content_"+ post_id).val();
+													 $.ajax({
+														 method: "POST",
+														 url: "/reply_write",
+														 data: {
+															 id_of_post: post_id,
+															 reply_content: post_content
+														 },
+														 success: function(){
+															 $("#reply_" + post_id).append("<p><strong>ㄴ  </strong>" + post_content + "<p>");
+															 $("#content_" + post_id).val('');
+															 alert("댓글이 작성되었습니다.");
+														 },
+														 error: function(){
+															 alert("댓글이 작성되지 않았습니다.");
+														 }
+													 });
+												 });
+											 });
+											</script>
+										 </div>
+									<% end %><!-- post end -->
+							</div>
+						</div>
+						<!-- 그저그런 사소한 이야기 -->
+						<div class="tab-pane fade in" id="trivial_posting">
+							<div class="tab-in">
+
+							</div>
+						</div>
+						<!-- 알아두면 좋은 이야기 -->
+						<div class="tab-pane fade in" id="good_posting">
+							<div class="tab-in">
+
+
+							</div>
+						</div>
+
+					</div>
+				</div>
+				<!-- End Tab v1 -->
+			</div>
+		</div>
+	</section>
+	<!-- End FAQ -->
+	<!-- Footer -->
+	<section id="contacts">
+		<div class="container-fluid with-bg-2 no-side-padding">
+			<div class="container">
+				<div class="footer">
+					<div class="row">
+						<div class="col-md-5">
+							<div class="g-heading-v10 g-mb-65">
+								<h2 class="g-color-white"><em class="block-name"><span class="g-color-white">03. 연락하기</span></em> 궁금한거 <strong>여기로.</strong></h2>
+								<p>
+								관리자 : 강두안, 박태일
+
+								</p>
+							</div>
+						</div>
+
+						<div class="col-md-7">
+							<form action="/email_write" method="post" id="sky-form3" class="sky-form contact-style">
+								<fieldset>
+									<div class="row">
+										<div class="col-md-6 col-md-offset-0">
+											<div class="margin-bottom-30">
+												<input type="text" name="name" id="name" class="form-control" placeholder="이름">
+											</div>
+
+											<div class="margin-bottom-30">
+												<input type="text" name="email" id="email" class="form-control" placeholder="메일주소 *">
+											</div>
+										</div>
+
+										<div class="col-md-6 col-md-offset-0">
+											<div class="margin-bottom-30">
+												<textarea rows="4" name="message" id="message" class="form-control g-textarea-noresize" placeholder="문의사항"></textarea>
+											</div>
+											<p><button type="submit" class="btn-u btn-u-lg btn-u-upper rounded-2x">보내기</button></p>
+										</div>
+									</div>
+								</fieldset>
+
+								<div class="message">
+									<i class="rounded-x fa fa-check"></i>
+									<p>성공적으로 메시지가 보내졌습니다.</p>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="container-fluid with-bg-2">
+			<div class="subfooter">
+				<div class="row">
+					<div class="col-md-12 no-side-padding">
+						<ul class="list-inline social-list text-center">
+						    <!--
+							<li class="facebook social-item"><a class="btn-block" href="#"><i class="fa fa-facebook"></i></a></li>
+							<li class="pin social-item"><a class="btn-block" href="#"><i class="fa fa-pinterest"></i></a></li>
+							<li class="dribbble social-item"><a class="btn-block" href="#"><i class="fa fa-dribbble"></i></a></li>
+							<li class="inst social-item"><a class="btn-block" href="#"><i class="fa fa-instagram"></i></a></li>
+							<li class="twitter social-item"><a class="btn-block" href="#"><i class="fa fa-twitter"></i></a></li>
+						    -->
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</section>
+	<!-- End Footer -->
+	<script src="../assets/plugins/bootstrap.min.js"></script>
+
+	<!-- JS Implementing Plugins ok! -->
+	<script src="../assets/plugins/smoothScroll.js"></script>
+	<script src="../assets/plugins/jquery.easing.min.js"></script>
+	<script src="../assets/plugins/pace.min.js"></script>
+	<script src="../assets/plugins/owl.carousel.min.js"></script>
+	<script src="../assets/plugins/jquery.form.min.js"></script>
+	<script src="../assets/plugins/jquery.validate.min.js"></script>
+	<script src="../assets/plugins/jquery.cubeportfolio.min.js"></script>
+	<script src="../assets/plugins/modernizr.js"></script>
+	<script src="../assets/plugins/shhos.js"></script>
+	<script src="../assets/plugins/wow-ini-themes.js"></script>
+
+	<!-- JS Page Level-->
+	<script src="../assets/js/one.app.js"></script>
+	<script src="../assets/js/pace-loader.js"></script>
+	<script src="../assets/js/owl-carousel2.js"></script>
+	<script src="../assets/js/cube-portfolio.js"></script>
+	<script src="../assets/js/wow.min.js"></script>
+	<script src="../assets/js/contact.js"></script>
+
+	<script>
+		$(function() {
+			App.init();
+			OwlCarousel.initOwlCarousel();
+			ContactForm.initContactForm();
+		});
+	</script>
+	<!--[if lt IE 10]>
+	  <script src="../assets/plugins/sky-forms-pro/skyforms/js/jquery.placeholder.min.js"></script>
+	<![endif]-->
+</body>
+</html>

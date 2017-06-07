@@ -1,0 +1,141 @@
+[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+<head>
+	<title>가톨릭대학교 채팅 커뮤니티</title>
+
+	<!-- Meta -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+	<!-- Favicon -->
+	<link rel="shortcut icon" href="../favicon.ico">
+
+	<!-- Web Fonts -->
+	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&amp;subset=cyrillic,latin">
+
+	<!-- CSS Global Compulsory ok!-->
+  <link rel="stylesheet" href="../assets/plugins/bootstrap.min.css">
+  <link rel="stylesheet" href="../assets/css/app.css">
+  <link rel="stylesheet" href="../assets/css/blocks.css">
+  <link rel="stylesheet" href="../assets/css/one.style.css">
+
+	<!-- CSS Footer ok!-->
+	<link rel="stylesheet" href="../assets/css/footers/footer-v7.css">
+
+	<!-- CSS Implementing Plugins ok!-->
+	<link rel="stylesheet" href="../assets/plugins/animate.css">
+	<link rel="stylesheet" href="../assets/plugins/line-icons.css">
+	<link rel="stylesheet" href="../assets/plugins/font-awesome.min.css">
+	<link rel="stylesheet" href="../assets/plugins/pace-flash.css">
+	<link rel="stylesheet" href="../assets/plugins/owl.carousel.css">
+	<link rel="stylesheet" href="../assets/plugins/cubeportfolio.min.css">
+	<link rel="stylesheet" href="../assets/plugins/custom-cubeportfolio.css">
+	<link rel="stylesheet" href="../assets/plugins/shhos.css">
+
+  <!-- CSS Theme ok!-->
+  <link rel="stylesheet" href="../assets/css/app.style.css">
+
+  <!-- CSS Customization ok!-->
+  <link rel="stylesheet" href="../assets/css/custom.css">
+</head>
+
+<body id="body" data-spy="scroll" data-target=".one-page-header" class="demo-lightbox-gallery">
+<!-- Header -->
+<div style="margin-bottom:100px;">
+	<nav class="one-page-header navbar navbar-default navbar-fixed-animate homeapp-header" data-role="navigation">
+		<div class="container">
+			<div class="menu-container page-scroll">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+
+				<a class="navbar-brand" href="#body">
+					<!-- logo <img src="assets/img/logo-dark.png" alt="Logo">-->
+				    <!--<h3 style="margin-left:150px;">캣챗</h3>-->
+              <h3><%= @chatroom.name %></h3>
+        </a>
+			</div>
+
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse navbar-ex1-collapse">
+				<div class="menu-container">
+					<ul class="nav navbar-nav">
+						<li class="page-scroll home">
+							<a href="#chat">다른 채팅방</a>
+						</li>
+           <% if user_signed_in? %>
+             <li class="dropdown">
+               <div style="margin-left:80px; margin-top:7px;"><strong><%= current_user.username %></strong>님이 입장하였습니다.</div>
+               <ul class="dropdown-menu">
+                 <li><%= link_to "설정", edit_user_registration_path %></li>
+                 <li role="separator" class="divider"></li>
+                 <li><%= link_to "로그아웃", destroy_user_session_path, method: :delete %></li>
+               </ul>
+             </li>
+           <% else %>
+             <li class="page-scroll hidden-xs hidden-sm"><%= link_to "회원가입", new_user_registration_path, class:"btn-u btn-u-lg btn-u-green btn-u-upper rounded-2x" %></li>
+             <li class="page-scroll hidden-xs hidden-sm"><%= link_to "로그인", new_user_session_path, class:"btn-u btn-u-lg btn-u-green btn-u-upper rounded-2x" %></li>
+           <% end %>
+         <!--
+						<li class="page-scroll hidden-xs hidden-sm">
+							  <a href="#" class="btn-u btn-u-lg btn-u-green btn-u-upper rounded-2x">SIGN_UP</a>
+            </li>
+						<li class="page-scroll hidden-xs hidden-sm">
+							<a href="#" class="btn-u btn-u-lg btn-u-green btn-u-upper rounded-2x">LOGIN</a>
+						</li>
+          -->
+					</ul>
+				</div>
+			</div>
+			<!-- /.navbar-collapse -->
+		</div>
+		<!-- /.container -->
+	</nav>
+</div>
+	<!-- End Header -->
+  <div class="fluid-container">
+    <div class="row">
+      <div class="col-sm-2">
+        <% if user_signed_in? %>
+          <h5><strong>방문한 채팅방</strong></h5>
+					<ul>
+					 <% current_user.chatrooms.each do |chatroom| %>
+						 <li><%= link_to chatroom.name, chatroom, data: {behavior: "chatroom-link", chatroom_id: chatroom.id} %></li>
+					 <% end %>
+				 </ul>
+				<% end %>
+      </div>
+    </div>
+  </div>
+
+<div class="col-sm-10 col-sm-offset-2">
+	<div data-behavior='messages' data-chatroom-id='<%= @chatroom.id %>'>
+		<!--
+		<% @chatroom.messages.limit(100).each do |message| %>
+			<div><strong><%= message.user.username %> : </strong><%= message.body %>
+		<% end %>
+		 -->
+		 <!--message.html.erb 렌더하는 systax -->
+		<% @messages.each do |message| %>
+	    <%= render message %>
+	  <% end %>
+
+	</div>
+
+	<%= form_for [@chatroom, Message.new] do |f| %>
+  	<%= f.text_area :body, rows: 1, class: "form-control", autofocus: true %>
+	<% end %>
+<br><br>
+<!--<%= link_to 'Edit', edit_chatroom_path(@chatroom) %> |-->
+<%= link_to '방 나가기', root_path %>
+
+</div>
+
+</body>
+</html>
